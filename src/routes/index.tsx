@@ -294,13 +294,14 @@ function LetterPage() {
 
   const onTouchStart = (e: React.TouchEvent) => {
     const p = e.touches[0];
-    touch.current = { x: p.clientX, y: p.clientY };
+    if (p) touch.current = { x: p.clientX, y: p.clientY };
   };
   const onTouchEnd = (e: React.TouchEvent) => {
     const start = touch.current;
     touch.current = null;
     if (!start || stage === "cover") return;
     const p = e.changedTouches[0];
+    if (!p) return;
     const dx = p.clientX - start.x;
     const dy = p.clientY - start.y;
     if (Math.abs(dx) < 55 || Math.abs(dy) > Math.abs(dx)) return;
@@ -332,7 +333,7 @@ function LetterPage() {
                 ref={scrollBox}
                 className="letter-prose flex-1 overflow-y-auto pr-1"
               >
-                {slides[index].lines.map((line, i) =>
+                {(slides[index]?.lines ?? []).map((line, i) =>
                   line.gap ? (
                     <div key={i} className="h-5" aria-hidden="true" />
                   ) : (
