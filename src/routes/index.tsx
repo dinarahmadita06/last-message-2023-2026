@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
       },
     ],
   }),
-  component: LetterPage;
+  component: LetterPage,
 });
 
 /* ---------------- ornaments ---------------- */
