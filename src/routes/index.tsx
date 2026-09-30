@@ -447,14 +447,22 @@ function Cover({ onOpen, opening }: { onOpen: () => void; opening: boolean }) {
           <span className="absolute right-[26.5%] top-[13%] h-[20%] aspect-square rounded-full border border-ink-soft/20" />
 
           {/* tulisan di badan amplop */}
-          <div className="absolute inset-x-0 bottom-[8%] text-center">
-            <Sprig className="mx-auto h-4 w-16 text-ink-soft/50" />
-            <h1 className="mt-1 font-hand text-4xl leading-tight text-ink sm:text-[2.6rem]">
+          <div className="absolute inset-x-0 bottom-[7%] flex flex-col items-center gap-3 text-center">
+            <Sprig className="h-4 w-16 text-ink-soft/50" />
+            <h1 className="font-hand text-4xl leading-tight text-ink sm:text-[2.6rem]">
               Untuk abang,
             </h1>
-            <p className="mt-0.5 text-[13px] italic leading-snug text-ink-soft">
+            <p className="text-[13px] italic leading-snug text-ink-soft">
               sebuah surat yang mungkin menjadi yang terakhir
             </p>
+            <button
+              type="button"
+              onClick={onOpen}
+              disabled={opening}
+              className="mt-1 rounded-full border border-primary/40 bg-secondary/50 px-6 py-2.5 text-[15px] tracking-wide text-ink transition-all duration-300 hover:bg-secondary/80 hover:shadow-sm"
+            >
+              Buka surat
+            </button>
           </div>
         </div>
 
