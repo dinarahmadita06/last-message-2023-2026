@@ -465,17 +465,6 @@ function Cover({ onOpen, opening }: { onOpen: () => void; opening: boolean }) {
             </button>
           </div>
         </div>
-
-        <div className="mt-10 text-center">
-          <button
-            type="button"
-            onClick={onOpen}
-            disabled={opening}
-            className="rounded-full border border-primary/40 bg-card px-8 py-3 text-base tracking-wide text-ink transition-all duration-300 hover:bg-secondary/70 hover:shadow-sm"
-          >
-            Buka surat
-          </button>
-        </div>
       </div>
     </div>
   );
