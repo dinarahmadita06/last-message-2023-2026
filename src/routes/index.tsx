@@ -415,7 +415,7 @@ function Cover({ onOpen, opening }: { onOpen: () => void; opening: boolean }) {
     >
       <div className="animate-soft-fade w-full max-w-sm">
         <div
-          className="relative mx-auto aspect-[3/2] w-full rounded-sm border border-border/80 bg-envelope"
+          className="relative mx-auto aspect-[3/2] w-full overflow-hidden rounded-sm border border-border/80 bg-envelope"
           style={{ boxShadow: "var(--shadow-letter)" }}
         >
           <div
@@ -430,30 +430,40 @@ function Cover({ onOpen, opening }: { onOpen: () => void; opening: boolean }) {
             <svg viewBox="0 0 300 150" className="w-full" aria-hidden="true">
               <path
                 d="M0 0 L150 112 L300 0 Z"
-                fill="var(--envelope)"
+                fill="var(--envelope-flap)"
                 stroke="var(--border)"
                 strokeWidth="1"
               />
             </svg>
           </div>
-          <span className="absolute left-1/2 top-[58%] grid h-11 w-11 -translate-x-1/2 place-items-center rounded-full border border-primary/30 bg-card text-ink-soft">
-            <Sprig className="h-4 w-8" />
+
+          {/* stamp */}
+          <span className="absolute right-[6%] top-[8%] grid h-[22%] aspect-[4/5] rotate-2 place-items-center rounded-[2px] border border-dashed border-primary/45 bg-card/80 text-primary/70">
+            <Sprig className="h-3 w-6" />
           </span>
+
+          {/* postmark */}
+          <span className="absolute right-[22%] top-[9%] h-[20%] aspect-square rounded-full border border-ink-soft/25" />
+          <span className="absolute right-[26.5%] top-[13%] h-[20%] aspect-square rounded-full border border-ink-soft/20" />
+
+          {/* tulisan di badan amplop */}
+          <div className="absolute inset-x-0 bottom-[8%] text-center">
+            <Sprig className="mx-auto h-4 w-16 text-ink-soft/50" />
+            <h1 className="mt-1 font-hand text-4xl leading-tight text-ink sm:text-[2.6rem]">
+              Untuk abang,
+            </h1>
+            <p className="mt-0.5 text-[13px] italic leading-snug text-ink-soft">
+              sebuah surat yang mungkin menjadi yang terakhir
+            </p>
+          </div>
         </div>
 
-        <div className="mt-11 text-center">
-          <h1 className="font-hand text-4xl leading-tight text-ink sm:text-5xl">
-            Untuk abang
-          </h1>
-          <p className="mt-4 text-sm italic leading-relaxed text-ink-soft">
-            sebuah surat yang mungkin menjadi yang terakhir
-          </p>
-
+        <div className="mt-10 text-center">
           <button
             type="button"
             onClick={onOpen}
             disabled={opening}
-            className="mt-10 rounded-full border border-primary/40 bg-card px-8 py-3 text-base tracking-wide text-ink transition-all duration-300 hover:bg-secondary/70 hover:shadow-sm"
+            className="rounded-full border border-primary/40 bg-card px-8 py-3 text-base tracking-wide text-ink transition-all duration-300 hover:bg-secondary/70 hover:shadow-sm"
           >
             Buka surat
           </button>
