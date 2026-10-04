@@ -447,7 +447,7 @@ function Final() {
       </p>
       <div className="h-20" aria-hidden="true" />
       <p className="animate-soft-fade max-w-xs text-lg italic leading-relaxed text-ink-soft" style={{ animationDelay: "2s" }}>
-        Untuk seseorang yang kucintai sejak tahun 2023 - detik ini
+        Dari seseorang yang mencintaimu sejak tahun 2023 - detik ini
       </p>
       <div className="animate-soft-fade mt-12 self-end text-right" style={{ animationDelay: "3s" }}>
         <p className="text-xl tracking-wide text-ink">Deenan Alfharaby</p>
