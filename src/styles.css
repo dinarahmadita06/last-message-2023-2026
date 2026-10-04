@@ -42,6 +42,10 @@
   --color-paper-edge: var(--paper-edge);
   --color-envelope: var(--envelope);
   --color-seal: var(--seal);
+  --color-ivory: var(--ivory);
+  --color-beige: var(--beige);
+  --color-washi: var(--washi);
+  --color-margin-line: var(--margin-line);
   --font-serif-letter: var(--font-letter);
   --font-hand: var(--font-hand);
 }
@@ -50,19 +54,23 @@
   --radius: 0.5rem;
 
   /* dusty blue stationery */
-  --paper: oklch(0.945 0.022 246);
-  --paper-edge: oklch(0.902 0.032 245);
-  --envelope: oklch(0.852 0.052 246);
-  --envelope-flap: oklch(0.884 0.046 246);
+  --paper: oklch(0.885 0.026 240);
+  --paper-edge: oklch(0.91 0.02 80);
+  --envelope: oklch(0.86 0.035 238);
+  --envelope-flap: oklch(0.884 0.03 238);
+  --ivory: oklch(0.968 0.017 86);
+  --beige: oklch(0.9 0.03 78);
+  --washi: oklch(0.82 0.04 238 / 0.6);
+  --margin-line: oklch(0.72 0.05 240 / 0.35);
 
   /* deep blue ink */
-  --ink: oklch(0.34 0.05 252);
-  --ink-soft: oklch(0.49 0.052 250);
+  --ink: oklch(0.36 0.035 250);
+  --ink-soft: oklch(0.52 0.035 245);
   --seal: oklch(0.6 0.09 250);
 
   --background: var(--paper);
   --foreground: var(--ink);
-  --card: oklch(0.968 0.016 248);
+  --card: var(--ivory);
   --card-foreground: var(--ink);
   --popover: var(--card);
   --popover-foreground: var(--ink);
@@ -141,13 +149,23 @@
   box-shadow: var(--shadow-letter);
 }
 
+@utility sheet {
+  background-color: var(--ivory);
+  background-image:
+    radial-gradient(90% 60% at 20% 0%, oklch(1 0 0 / 0.5), transparent 60%),
+    radial-gradient(70% 50% at 100% 100%, oklch(0.88 0.035 75 / 0.45), transparent 70%),
+    radial-gradient(40% 30% at 85% 15%, oklch(0.9 0.03 75 / 0.25), transparent 70%),
+    repeating-linear-gradient(97deg, oklch(0.8 0.02 80 / 0.05) 0 1px, transparent 1px 4px);
+  box-shadow: 0 1px 0 oklch(1 0 0 / 0.6) inset, 0 24px 60px -30px oklch(0.4 0.04 245 / 0.45), 0 2px 6px -2px oklch(0.4 0.04 245 / 0.15);
+}
+
 @utility font-hand {
   font-family: var(--font-hand);
 }
 
 @utility letter-prose {
-  font-size: 1.125rem;
-  line-height: 1.85;
+  font-size: 1.3rem;
+  line-height: 1.75;
   letter-spacing: 0.004em;
 }
 
@@ -194,6 +212,14 @@
   }
 }
 
+@keyframes sheet-in {
+  from { opacity: 0; transform: perspective(1600px) rotateY(-14deg) translateX(28px); filter: blur(1px); }
+  to { opacity: 1; transform: perspective(1600px) rotateY(0) translateX(0); filter: blur(0); }
+}
+@keyframes sheet-in-back {
+  from { opacity: 0; transform: perspective(1600px) rotateY(14deg) translateX(-28px); filter: blur(1px); }
+  to { opacity: 1; transform: perspective(1600px) rotateY(0) translateX(0); filter: blur(0); }
+}
 @keyframes flap-open {
   from {
     transform: rotateX(0deg);
@@ -212,11 +238,13 @@
 }
 
 @utility animate-turn {
-  animation: page-turn-in 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  transform-origin: left center;
+  animation: sheet-in 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 @utility animate-turn-back {
-  animation: page-turn-in-back 0.6s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+  transform-origin: right center;
+  animation: sheet-in-back 1.1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
 
 @media (prefers-reduced-motion: reduce) {
