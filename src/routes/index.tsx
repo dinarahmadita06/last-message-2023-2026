@@ -4,12 +4,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Untuk abang — sebuah surat" },
+      { title: "Untukmu" },
       {
         name: "description",
         content: "Sebuah surat yang mungkin menjadi yang terakhir. Dibuka lembar demi lembar.",
       },
-      { property: "og:title", content: "Untuk abang — sebuah surat" },
+      { property: "og:title", content: "Untukmu" },
       { property: "og:description", content: "Sebuah surat yang mungkin menjadi yang terakhir." },
       { property: "og:type", content: "article" },
       { name: "twitter:card", content: "summary" },
@@ -95,7 +95,7 @@ const slides: Slide[] = [
       gap,
       t("Sebenernya aku masih nggak nyangka ya kalau kita udah selesai."),
       gap,
-      t("Teks ini ditulis di tanggal 30 September 2026, jam 12.39 siang, tepat 120 hari (4 bulan) kita berpisah."),
+      t("Oh iya teks ini ditulis di tanggal 30 September 2026, jam 12.39 siang, tepat 120 hari (4 bulan) kita berpisah dan dalam kondisi demam 39.4 derajat Celsius."),
       gap,
       t("Dan hingga detik ketika abang baca ini, perasaanku masih sama."),
       gap,
@@ -107,13 +107,16 @@ const slides: Slide[] = [
     lines: [
       t("Abang, ini mungkin akan jadi chat terakhir dari ku."),
       gap,
-      t("Semoga ini menjadi kabar baik untuk abang karena setelah ini nggak akan ada lagi yang ganggu abang."),
+      t("Semoga ini menjadi kabar baik untuk abang karena setelah ini baik aku ataupun abang sama sama gak tau nomor. Aku gatau nomor WA Abang dan abang juga gatau nomor WA-ku."),
       gap,
       t("Abang, berjanjilah sama aku."),
       gap,
       t("Abang harus lebih bahagia.", { hand: true }),
       t("Abang harus lebih baik.", { hand: true }),
       t("Abang harus lebih sehat.", { hand: true }),
+      t("Abang harus lebih dewasa.", { hand: true }),
+      t("Abang harus lebih kuat.", { hand: true }),
+      t("Abang harus lebih sabar.", { hand: true }),
       gap,
       t("Karena kebahagiaan abang adalah kebahagiaanku juga, walaupun itu tanpa adanya aku di dalamnya 😊"),
     ],
@@ -131,13 +134,6 @@ const slides: Slide[] = [
       t("Kejar semua harapan abang."),
       gap,
       t("Aku di sini cuma bisa do'ain yang terbaik untuk abang."),
-    ],
-  },
-  {
-    deco: ["line"],
-    airy: true,
-    lines: [
-      t("Kalau dulu aku berdoa sama Allah agar menjadikan kita sebagai pasangan, maka sekarang aku minta sama Allah untuk menghapus semua perasaan dari hati dan pikiranku."),
     ],
   },
   {
@@ -429,18 +425,13 @@ function Cover() {
   return (
     <div className="relative flex flex-1 flex-col px-8 pt-20 sm:px-14 sm:pt-24">
       <span className="absolute inset-y-0 left-5 w-px bg-margin-line sm:left-8" />
-      <h1 className="animate-rise font-hand text-[3.2rem] leading-none text-ink" style={{ animationDelay: "300ms" }}>
-        Untuk abang,
+      <h1 className="animate-rise font-hand text-[2.8rem] leading-none text-ink" style={{ animationDelay: "300ms" }}>
+       ~ Untuk seseorang yang ku cintai sejak tahun 2023 hingga saat ini
       </h1>
       <p className="animate-soft-fade mt-4 font-hand text-xl text-ink-soft" style={{ animationDelay: "900ms" }}>
         30 September 2026
       </p>
-      <Squiggle className="animate-soft-fade mt-8 h-3 w-40 text-ink-soft/50" />
-      <p className="animate-soft-fade mt-10 text-xl italic leading-relaxed text-ink-soft" style={{ animationDelay: "1.4s" }}>
-        sebuah surat yang mungkin
-        <br />
-        menjadi yang terakhir
-      </p>
+      
       <Flower className="animate-soft-fade mt-auto mb-8 ml-auto h-16 w-14 rotate-6 text-primary/45" />
     </div>
   );

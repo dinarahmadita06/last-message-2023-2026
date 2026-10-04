@@ -78,12 +78,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Untuk abang — sebuah surat" },
+      { title: "Untukmu" },
       {
         name: "description",
         content: "Sebuah surat yang mungkin menjadi yang terakhir.",
       },
-      { property: "og:title", content: "Untuk abang — sebuah surat" },
+      { property: "og:title", content: "Untukmu" },
       {
         property: "og:description",
         content: "Sebuah surat yang mungkin menjadi yang terakhir.",
@@ -107,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "data:," },
     ],
   }),
   shellComponent: RootShell,
