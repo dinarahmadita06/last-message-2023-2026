@@ -367,7 +367,7 @@ function LetterPage() {
 
 /* ---------------- sheet ---------------- */
 
-function Decorations({ deco = [] }: { deco?: Deco[] }) {
+function Decorations({ deco = [] }: { deco?: Deco[] | undefined }) {
   return (
     <>
       {deco.includes("tape") && (
