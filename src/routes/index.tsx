@@ -7,63 +7,76 @@ export const Route = createFileRoute("/")({
       { title: "Untuk abang — sebuah surat" },
       {
         name: "description",
-        content:
-          "Sebuah surat yang mungkin menjadi yang terakhir. Dibuka lembar demi lembar.",
+        content: "Sebuah surat yang mungkin menjadi yang terakhir. Dibuka lembar demi lembar.",
       },
       { property: "og:title", content: "Untuk abang — sebuah surat" },
-      {
-        property: "og:description",
-        content: "Sebuah surat yang mungkin menjadi yang terakhir.",
-      },
+      { property: "og:description", content: "Sebuah surat yang mungkin menjadi yang terakhir." },
+      { property: "og:type", content: "article" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: LetterPage,
 });
 
-/* ---------------- ornaments ---------------- */
+/* ---------------- doodles ---------------- */
 
-function Sprig({ className = "" }: { className?: string }) {
+function Flower({ className = "" }: { className?: string }) {
   return (
-    <svg
-      viewBox="0 0 120 40"
-      aria-hidden="true"
-      className={className}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1"
-      strokeLinecap="round"
-    >
-      <path d="M8 20h104" opacity="0.45" />
-      <path d="M60 20c-6-6-14-8-20-7 4 6 12 9 20 7Z" opacity="0.7" />
-      <path d="M60 20c6-6 14-8 20-7-4 6-12 9-20 7Z" opacity="0.7" />
-      <circle cx="60" cy="20" r="1.6" opacity="0.8" />
+    <svg viewBox="0 0 40 48" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round">
+      <path d="M20 22c-1 8 0 16 2 24" />
+      <path d="M21 34c4-3 8-3 10-1-3 3-7 3-10 1Z" />
+      <circle cx="20" cy="14" r="2.4" />
+      <path d="M20 11.5c-2-5 2-8 2-8s3 4 0 8M22.4 14c5-1 7 3 7 3s-5 2-7-1M20 16.5c1 5-3 7-3 7s-2-5 1-7M17.6 14c-5 0-6-4-6-4s5-2 6 2" />
     </svg>
   );
 }
 
-function Rule() {
+function Heart({ className = "" }: { className?: string }) {
   return (
-    <div className="mx-auto flex items-center justify-center py-1 text-ink-soft/60">
-      <Sprig className="h-5 w-24" />
-    </div>
+    <svg viewBox="0 0 24 22" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round">
+      <path d="M12 19C5 14 2.5 10.5 3.2 7.2 4 4 7.8 3 10 5.6c.8.9 1.4 1.8 2 2.6.5-1 1.3-2.2 2.4-3 2.6-1.8 6-.4 6.3 2.8.4 3.5-3.2 7.4-8.4 11.2" />
+    </svg>
+  );
+}
+
+function Clip({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 20 60" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <path d="M6 18V8a4 4 0 0 1 8 0v40a6 6 0 0 1-12 0V14" />
+    </svg>
+  );
+}
+
+function Squiggle({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 160 10" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round">
+      <path d="M2 5c12-4 22 4 34 0s22-4 34 0 22 4 34 0 22-4 34 0 12 2 20 0" />
+    </svg>
   );
 }
 
 /* ---------------- letter content ---------------- */
 
-type Line = { text: string; strong?: boolean; em?: boolean; gap?: boolean };
-type Slide = { lines: Line[] };
+type Line = { text: string; strong?: boolean; hand?: boolean; gap?: boolean };
+type Deco = "tape" | "clip" | "flower" | "line" | "heart";
+type Slide = {
+  lines: Line[];
+  deco?: Deco[];
+  corner?: string;
+  note?: string;
+  moment?: boolean;
+  airy?: boolean;
+};
 
-const t = (text: string, opts: Omit<Line, "text"> = {}): Line => ({
-  text,
-  ...opts,
-});
+const t = (text: string, opts: Omit<Line, "text"> = {}): Line => ({ text, ...opts });
 const gap: Line = { text: "", gap: true };
 
 const slides: Slide[] = [
   {
+    deco: ["tape"],
+    corner: "30 · 09 · 2026",
     lines: [
-      t("Hai abang."),
+      t("Hai abang.", { hand: true }),
       gap,
       t("Apa kabar? Semoga sehat dan bahagia terus ya 😊"),
       gap,
@@ -75,62 +88,62 @@ const slides: Slide[] = [
     ],
   },
   {
+    deco: ["line"],
+    note: "12.39 siang",
     lines: [
-      t("Abang.."),
+      t("Abang..", { hand: true }),
       gap,
       t("Sebenernya aku masih nggak nyangka ya kalau kita udah selesai."),
       gap,
-      t(
-        "Teks ini ditulis di tanggal 30 September 2026, jam 12.39 siang, tepat 120 hari (4 bulan) kita berpisah.",
-      ),
+      t("Teks ini ditulis di tanggal 30 September 2026, jam 12.39 siang, tepat 120 hari (4 bulan) kita berpisah."),
       gap,
       t("Dan hingga detik ketika abang baca ini, perasaanku masih sama."),
       gap,
-      t("Abang masih jadi satu-satunya orang yang pengen kuajak dalam segala hal."),
+      t("Abang masih jadi satu-satunya orang yang pengen kuajak dalam segala hal.", { strong: true }),
     ],
   },
   {
+    deco: ["flower"],
     lines: [
       t("Abang, ini mungkin akan jadi chat terakhir dari ku."),
       gap,
-      t(
-        "Semoga ini menjadi kabar baik untuk abang karena setelah ini nggak akan ada lagi yang ganggu abang.",
-      ),
+      t("Semoga ini menjadi kabar baik untuk abang karena setelah ini nggak akan ada lagi yang ganggu abang."),
       gap,
       t("Abang, berjanjilah sama aku."),
       gap,
-      t("Abang harus lebih bahagia.", { strong: true }),
-      t("Abang harus lebih baik.", { strong: true }),
-      t("Abang harus lebih sehat.", { strong: true }),
+      t("Abang harus lebih bahagia.", { hand: true }),
+      t("Abang harus lebih baik.", { hand: true }),
+      t("Abang harus lebih sehat.", { hand: true }),
       gap,
-      t(
-        "Karena kebahagiaan abang adalah kebahagiaanku juga, walaupun itu tanpa adanya aku di dalamnya 😊",
-      ),
+      t("Karena kebahagiaan abang adalah kebahagiaanku juga, walaupun itu tanpa adanya aku di dalamnya 😊"),
     ],
   },
   {
+    deco: ["clip"],
     lines: [
-      t("Abang,"),
+      t("Abang,", { hand: true }),
       gap,
-      t(
-        "bersamaan dengan chat terakhir ini, InsyaAllah aku akan mulai belajar ikhlas ngelepasin abang.",
-      ),
+      t("bersamaan dengan chat terakhir ini, InsyaAllah aku akan mulai belajar ikhlas ngelepasin abang."),
       gap,
-      t("Terbanglah makin tinggi, abang."),
+      t("Terbanglah makin tinggi, abang.", { strong: true }),
       gap,
       t("Kejar semua impian abang."),
       t("Kejar semua harapan abang."),
       gap,
       t("Aku di sini cuma bisa do'ain yang terbaik untuk abang."),
-      gap,
-      t(
-        "Kalau dulu aku berdoa sama Allah agar menjadikan kita sebagai pasangan, maka sekarang aku minta sama Allah untuk menghapus semua perasaan dari hati dan pikiranku.",
-      ),
     ],
   },
   {
+    deco: ["line"],
+    airy: true,
     lines: [
-      t("Abang..."),
+      t("Kalau dulu aku berdoa sama Allah agar menjadikan kita sebagai pasangan, maka sekarang aku minta sama Allah untuk menghapus semua perasaan dari hati dan pikiranku."),
+    ],
+  },
+  {
+    deco: ["tape"],
+    lines: [
+      t("Abang...", { hand: true }),
       gap,
       t("Semoga abang selalu dikelilingi orang baik."),
       gap,
@@ -147,15 +160,24 @@ const slides: Slide[] = [
     ],
   },
   {
+    airy: true,
     lines: [
-      t("Abang sayang..", { strong: true }),
+      t("Abang sayang..", { hand: true }),
       gap,
       t("Maaf kalau ini lancang."),
       gap,
+      gap,
       t("Aku..."),
-      gap,
-      t("Kangen banget sama abang.", { strong: true }),
-      gap,
+    ],
+  },
+  {
+    moment: true,
+    deco: ["heart"],
+    lines: [t("Kangen banget sama abang.")],
+  },
+  {
+    note: "maaf ya",
+    lines: [
       t("Apakah abang merasakan hal yang sama?"),
       gap,
       t("Hehe, nggak ya 😅"),
@@ -164,55 +186,50 @@ const slides: Slide[] = [
       gap,
       t("Tapi maaf ya abang, janji ini yang terakhir."),
       gap,
-      t("Aku kangen banget sama abang.", { strong: true }),
+      t("Aku kangen banget sama abang.", { hand: true }),
     ],
   },
   {
+    airy: true,
+    deco: ["flower"],
     lines: [
-      t(
-        "Kalau suatu hari nanti kita bertemu kembali, akan aku ceritakan gimana beratnya hari-hariku kujalani tanpa adanya abang.",
-      ),
+      t("Kalau suatu hari nanti kita bertemu kembali, akan aku ceritakan gimana beratnya hari-hariku kujalani tanpa adanya abang."),
     ],
   },
   {
+    deco: ["clip"],
     lines: [
-      t("Abang..."),
+      t("Abang...", { hand: true }),
       gap,
       t("Aku ternyata pengecut."),
       gap,
-      t(
-        "Kalau dulu aku harus pergi dari Liwa ke Balam untuk melupakan cinta pertamaku, maka sekarang mungkin aku akan melakukan hal yang sama.",
-      ),
+      t("Kalau dulu aku harus pergi dari Liwa ke Balam untuk melupakan cinta pertamaku, maka sekarang mungkin aku akan melakukan hal yang sama."),
       gap,
       t("Ketika abang baca ini, yang jelas aku udah nggak di Bandar Lampung."),
-      gap,
       t("Tapi masih di Indonesia."),
       gap,
       t("I don't know kapan."),
-      gap,
-      t("Mungkin bulan depan."),
-      t("3 bulan lagi."),
-      t("6 bulan lagi."),
-      t("Atau tahun depan."),
-      gap,
-      t("I'll move to another country.", { strong: true }),
-      gap,
-      t(
-        "Pengaruh yang abang tinggalin luar biasa, sampai untuk pertama kalinya aku bakal pergi sejauh ini.",
-      ),
+      t("Mungkin bulan depan. 3 bulan lagi. 6 bulan lagi. Atau tahun depan."),
     ],
   },
   {
+    moment: true,
     lines: [
-      t("Abang,"),
+      t("I'll move to another country."),
+      gap,
+      t("Pengaruh yang abang tinggalin luar biasa, sampai untuk pertama kalinya aku bakal pergi sejauh ini.", { strong: true }),
+    ],
+  },
+  {
+    deco: ["line"],
+    lines: [
+      t("Abang,", { hand: true }),
       gap,
       t("aku nggak akan menagih semua janji yang pernah abang bilang ke aku."),
       gap,
       t("Terutama tentang rencana dalam 5 tahun ke depan terkait pernikahan."),
       gap,
-      t(
-        "Aku akan anggap itu sebagai perkataan ngelantur yang diucapkan oleh seseorang saat tidak sadar.",
-      ),
+      t("Aku akan anggap itu sebagai perkataan ngelantur yang diucapkan oleh seseorang saat tidak sadar."),
       gap,
       t("Barangkali abang sudah menemukan orang baru di sana."),
       gap,
@@ -220,8 +237,10 @@ const slides: Slide[] = [
     ],
   },
   {
+    deco: ["tape", "heart"],
+    note: "13.03",
     lines: [
-      t("Okay, abangg."),
+      t("Okay, abangg.", { hand: true }),
       gap,
       t("Ingat yaa janji denganku tadi."),
       gap,
@@ -231,12 +250,13 @@ const slides: Slide[] = [
       gap,
       t("Jangan menangis kecuali tangisan bahagia."),
       gap,
-      t("Chat ini selesai diketik jam 13.03.", { strong: true }),
+      t("Chat ini selesai diketik jam 13.03."),
     ],
   },
 ];
 
 const TOTAL = slides.length;
+const pad = (n: number) => String(n).padStart(2, "0");
 
 /* ---------------- page ---------------- */
 
@@ -246,14 +266,15 @@ function LetterPage() {
   const [stage, setStage] = useState<Stage>("cover");
   const [index, setIndex] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
-  const [opening, setOpening] = useState(false);
   const touch = useRef<{ x: number; y: number } | null>(null);
   const scrollBox = useRef<HTMLDivElement | null>(null);
 
   const next = useCallback(() => {
     setDir(1);
-    if (stage === "cover") return;
-    if (stage === "letter") {
+    if (stage === "cover") {
+      setStage("letter");
+      setIndex(0);
+    } else if (stage === "letter") {
       if (index < TOTAL - 1) setIndex((i) => i + 1);
       else setStage("final");
     }
@@ -264,29 +285,20 @@ function LetterPage() {
     if (stage === "final") {
       setStage("letter");
       setIndex(TOTAL - 1);
-      return;
+    } else if (stage === "letter") {
+      if (index > 0) setIndex((i) => i - 1);
+      else setStage("cover");
     }
-    if (stage === "letter" && index > 0) setIndex((i) => i - 1);
   }, [stage, index]);
-
-  const open = useCallback(() => {
-    setOpening(true);
-    window.setTimeout(() => {
-      setStage("letter");
-      setIndex(0);
-      setDir(1);
-    }, 900);
-  }, []);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowRight" || (e.key === "Enter" && stage === "cover")) next();
       else if (e.key === "ArrowLeft") prev();
-      else if (e.key === "Enter" && stage === "cover" && !opening) open();
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [next, prev, open, stage, opening]);
+  }, [next, prev, stage]);
 
   useEffect(() => {
     scrollBox.current?.scrollTo({ top: 0 });
@@ -299,9 +311,8 @@ function LetterPage() {
   const onTouchEnd = (e: React.TouchEvent) => {
     const start = touch.current;
     touch.current = null;
-    if (!start || stage === "cover") return;
     const p = e.changedTouches[0];
-    if (!p) return;
+    if (!start || !p) return;
     const dx = p.clientX - start.x;
     const dy = p.clientY - start.y;
     if (Math.abs(dx) < 55 || Math.abs(dy) > Math.abs(dx)) return;
@@ -309,211 +320,148 @@ function LetterPage() {
     else prev();
   };
 
+  const key = stage === "letter" ? `l${index}` : stage;
+  const slide = slides[index];
+
   return (
     <main
-      className="relative flex w-full flex-col overflow-hidden"
-      style={{ minHeight: "100dvh" }}
+      className="flex w-full items-stretch justify-center sm:px-6 sm:py-6"
+      style={{ minHeight: "100dvh", height: "100dvh" }}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {stage === "cover" && <Cover onOpen={open} opening={opening} />}
+      <article
+        key={key}
+        className={
+          (dir === 1 ? "animate-turn" : "animate-turn-back") +
+          " sheet relative flex h-full w-full max-w-[40rem] flex-col overflow-hidden sm:rounded-[3px]"
+        }
+      >
+        {stage === "cover" && <Cover />}
+        {stage === "letter" && slide && <Sheet slide={slide} scrollRef={scrollBox} />}
+        {stage === "final" && <Final />}
 
-      {stage === "letter" && (
-        <div className="flex min-h-[100dvh] w-full flex-col px-5 pt-8 pb-7 sm:px-8">
-          <div className="mx-auto flex w-full max-w-[38rem] flex-1 flex-col">
-            <div
-              key={index}
-              className={
-                (dir === 1 ? "animate-turn" : "animate-turn-back") +
-                " paper-sheet relative flex flex-1 flex-col rounded-sm border border-border/70 px-6 py-9 sm:px-10 sm:py-12"
-              }
-            >
-              <span className="pointer-events-none absolute right-0 top-0 h-10 w-10 border-l border-b border-border/70 bg-muted/60" />
-              <div
-                ref={scrollBox}
-                className="letter-prose flex-1 overflow-y-auto pr-1"
-              >
-                {(slides[index]?.lines ?? []).map((line, i) =>
-                  line.gap ? (
-                    <div key={i} className="h-5" aria-hidden="true" />
-                  ) : (
-                    <p
-                      key={i}
-                      className={
-                        "animate-rise " +
-                        (line.strong
-                          ? "font-medium text-ink"
-                          : "text-ink/90")
-                      }
-                      style={{ animationDelay: `${Math.min(i * 70, 560)}ms` }}
-                    >
-                      {line.text}
-                    </p>
-                  ),
-                )}
-              </div>
-              <div className="pt-7">
-                <Rule />
-              </div>
-            </div>
-
-            <nav className="mt-6 flex items-center justify-between gap-4">
-              <button
-                type="button"
-                onClick={prev}
-                disabled={index === 0}
-                className="rounded-full px-4 py-2 text-sm tracking-wide text-ink-soft transition-colors hover:text-ink disabled:opacity-0"
-              >
-                ← Kembali
-              </button>
-
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5">
-                  {slides.map((_, i) => (
-                    <span
-                      key={i}
-                      className={
-                        "h-1.5 rounded-full transition-all duration-500 " +
-                        (i === index
-                          ? "w-4 bg-primary/70"
-                          : "w-1.5 bg-ink-soft/30")
-                      }
-                    />
-                  ))}
-                </div>
-                <span className="font-hand text-base text-ink-soft">
-                  {index + 1} / {TOTAL}
-                </span>
-              </div>
-
-              <button
-                type="button"
-                onClick={next}
-                className="rounded-full border border-border bg-secondary/60 px-5 py-2 text-sm tracking-wide text-ink transition-colors hover:bg-secondary"
-              >
-                Lanjut →
-              </button>
-            </nav>
-          </div>
-        </div>
-      )}
-
-      {stage === "final" && <Final onBack={prev} />}
+        <nav className="relative z-10 flex items-center justify-between px-7 pb-6 pt-3 text-ink-soft sm:px-12">
+          <button
+            type="button"
+            onClick={prev}
+            className={"text-[15px] italic transition-colors hover:text-ink " + (stage === "cover" ? "invisible" : "")}
+          >
+            ← sebelumnya
+          </button>
+          <span className="text-xs tracking-[0.25em] text-ink-soft/70">
+            {stage === "letter" ? `${pad(index + 1)} / ${pad(TOTAL)}` : ""}
+          </span>
+          <button
+            type="button"
+            onClick={next}
+            className={"font-hand text-xl transition-colors hover:text-ink " + (stage === "final" ? "invisible" : "")}
+          >
+            {stage === "cover" ? "buka surat →" : "berikutnya →"}
+          </button>
+        </nav>
+      </article>
     </main>
+  );
+}
+
+/* ---------------- sheet ---------------- */
+
+function Decorations({ deco = [] }: { deco?: Deco[] | undefined }) {
+  return (
+    <>
+      {deco.includes("tape") && (
+        <span className="pointer-events-none absolute -top-1 left-1/2 h-7 w-28 -translate-x-1/2 -rotate-3 bg-washi" style={{ clipPath: "polygon(3% 0,97% 4%,100% 100%,0 94%)" }} />
+      )}
+      {deco.includes("clip") && <Clip className="pointer-events-none absolute -top-2 right-10 h-16 w-5 text-ink-soft/50" />}
+      {deco.includes("flower") && <Flower className="pointer-events-none absolute bottom-20 right-8 h-14 w-12 rotate-6 text-primary/45" />}
+      {deco.includes("line") && <span className="pointer-events-none absolute inset-y-0 left-5 w-px bg-margin-line sm:left-8" />}
+      {deco.includes("heart") && <Heart className="pointer-events-none absolute bottom-20 left-9 h-5 w-5 -rotate-12 text-primary/50" />}
+    </>
+  );
+}
+
+function Sheet({ slide, scrollRef }: { slide: Slide; scrollRef: React.RefObject<HTMLDivElement | null> }) {
+  return (
+    <>
+      <Decorations deco={slide.deco} />
+      {slide.corner && <span className="absolute right-7 top-6 font-hand text-lg text-ink-soft/80 sm:right-12">{slide.corner}</span>}
+      {slide.note && <span className="absolute right-8 top-[42%] rotate-[-8deg] font-hand text-lg text-primary/55 sm:right-12">{slide.note}</span>}
+
+      <div
+        ref={scrollRef}
+        className={
+          "letter-prose relative flex-1 overflow-y-auto px-8 sm:px-14 " +
+          (slide.moment ? "flex flex-col items-center justify-center text-center" : slide.airy ? "flex flex-col justify-center pb-16" : "pt-16 pb-6 sm:pt-20")
+        }
+      >
+        {slide.lines.map((line, i) => {
+          if (line.gap) return <div key={i} className="h-4" aria-hidden="true" />;
+          const delay = { animationDelay: `${400 + Math.min(i * 90, 900)}ms` };
+          if (slide.moment && i === 0)
+            return (
+              <p key={i} className="animate-soft-fade font-hand text-[2.6rem] leading-tight text-ink sm:text-5xl" style={{ animationDelay: "700ms" }}>
+                {line.text}
+              </p>
+            );
+          return (
+            <p
+              key={i}
+              className={
+                "animate-rise " +
+                (line.hand ? "font-hand text-[1.75rem] leading-snug text-ink" : line.strong ? "italic text-ink" : "text-ink/90") +
+                (slide.moment ? " max-w-xs text-lg text-ink-soft" : "")
+              }
+              style={delay}
+            >
+              {line.text}
+            </p>
+          );
+        })}
+      </div>
+    </>
   );
 }
 
 /* ---------------- cover ---------------- */
 
-function Cover({ onOpen, opening }: { onOpen: () => void; opening: boolean }) {
+function Cover() {
   return (
-    <div
-      className={
-        "flex min-h-[100dvh] flex-col items-center justify-center px-6 py-14 transition-all duration-700 " +
-        (opening ? "scale-[1.04] opacity-0" : "opacity-100")
-      }
-    >
-      <div className="animate-soft-fade w-full max-w-sm">
-        <div
-          className="relative mx-auto aspect-[3/2] w-full overflow-hidden rounded-sm border border-border/80 bg-envelope"
-          style={{ boxShadow: "var(--shadow-letter)" }}
-        >
-          <div
-            className="absolute inset-x-0 top-0 origin-top"
-            style={{
-              animation: opening
-                ? "flap-open 0.85s cubic-bezier(0.4,0,0.2,1) forwards"
-                : undefined,
-              transformStyle: "preserve-3d",
-            }}
-          >
-            <svg viewBox="0 0 300 150" className="w-full" aria-hidden="true">
-              <path
-                d="M0 0 L150 112 L300 0 Z"
-                fill="var(--envelope-flap)"
-                stroke="var(--border)"
-                strokeWidth="1"
-              />
-            </svg>
-          </div>
-
-          {/* stamp */}
-          <span className="absolute right-[6%] top-[8%] grid h-[22%] aspect-[4/5] rotate-2 place-items-center rounded-[2px] border border-dashed border-primary/45 bg-card/80 text-primary/70">
-            <Sprig className="h-3 w-6" />
-          </span>
-
-          {/* postmark */}
-          <span className="absolute right-[22%] top-[9%] h-[20%] aspect-square rounded-full border border-ink-soft/25" />
-          <span className="absolute right-[26.5%] top-[13%] h-[20%] aspect-square rounded-full border border-ink-soft/20" />
-
-          {/* tulisan di badan amplop */}
-          <div className="absolute inset-x-0 bottom-[7%] flex flex-col items-center gap-3 text-center">
-            <Sprig className="h-4 w-16 text-ink-soft/50" />
-            <h1 className="font-hand text-4xl leading-tight text-ink sm:text-[2.6rem]">
-              Untuk abang,
-            </h1>
-            <p className="text-[13px] italic leading-snug text-ink-soft">
-              sebuah surat yang mungkin menjadi yang terakhir
-            </p>
-            <button
-              type="button"
-              onClick={onOpen}
-              disabled={opening}
-              className="mt-1 rounded-full border border-primary/40 bg-secondary/50 px-6 py-2.5 text-[15px] tracking-wide text-ink transition-all duration-300 hover:bg-secondary/80 hover:shadow-sm"
-            >
-              Buka surat
-            </button>
-          </div>
-        </div>
-      </div>
+    <div className="relative flex flex-1 flex-col px-8 pt-20 sm:px-14 sm:pt-24">
+      <span className="absolute inset-y-0 left-5 w-px bg-margin-line sm:left-8" />
+      <h1 className="animate-rise font-hand text-[3.2rem] leading-none text-ink" style={{ animationDelay: "300ms" }}>
+        Untuk abang,
+      </h1>
+      <p className="animate-soft-fade mt-4 font-hand text-xl text-ink-soft" style={{ animationDelay: "900ms" }}>
+        30 September 2026
+      </p>
+      <Squiggle className="animate-soft-fade mt-8 h-3 w-40 text-ink-soft/50" />
+      <p className="animate-soft-fade mt-10 text-xl italic leading-relaxed text-ink-soft" style={{ animationDelay: "1.4s" }}>
+        sebuah surat yang mungkin
+        <br />
+        menjadi yang terakhir
+      </p>
+      <Flower className="animate-soft-fade mt-auto mb-8 ml-auto h-16 w-14 rotate-6 text-primary/45" />
     </div>
   );
 }
 
 /* ---------------- final ---------------- */
 
-function Final({ onBack }: { onBack: () => void }) {
+function Final() {
   return (
-    <div className="flex min-h-[100dvh] flex-col items-center justify-center px-7 py-20 text-center">
-      <p
-        className="animate-rise font-hand text-3xl leading-snug text-ink sm:text-4xl"
-        style={{ animationDelay: "200ms" }}
-      >
+    <div className="flex flex-1 flex-col justify-end px-8 pb-10 sm:px-14">
+      <p className="animate-rise font-hand text-[2.2rem] leading-snug text-ink" style={{ animationDelay: "500ms" }}>
         Sampai jumpa, manusia favoritku.
       </p>
-
-      <div className="h-24 sm:h-32" aria-hidden="true" />
-
-      <p
-        className="animate-soft-fade max-w-xs text-base italic leading-relaxed text-ink-soft"
-        style={{ animationDelay: "2.1s" }}
-      >
-        Untuk seseorang yang kucintai sejak tahun 2023 — detik ini.
+      <div className="h-20" aria-hidden="true" />
+      <p className="animate-soft-fade max-w-xs text-lg italic leading-relaxed text-ink-soft" style={{ animationDelay: "2s" }}>
+        Untuk seseorang yang kucintai sejak tahun 2023 - detik ini
       </p>
-
-      <p
-        className="animate-soft-fade mt-8 text-lg tracking-wide text-ink"
-        style={{ animationDelay: "3.2s" }}
-      >
-        Deenan Alfharaby
-      </p>
-      <p
-        className="animate-soft-fade mt-2 text-xs tracking-[0.2em] text-ink-soft/80 uppercase"
-        style={{ animationDelay: "3.6s" }}
-      >
-        30 September 2026
-      </p>
-
-      <div className="mt-20">
-        <Rule />
-        <button
-          type="button"
-          onClick={onBack}
-          className="animate-soft-fade mt-6 text-xs italic text-ink-soft/70 transition-colors hover:text-ink-soft"
-          style={{ animationDelay: "4.2s" }}
-        >
-          surat ini selesai.
-        </button>
+      <div className="animate-soft-fade mt-12 self-end text-right" style={{ animationDelay: "3s" }}>
+        <p className="text-xl tracking-wide text-ink">Deenan Alfharaby</p>
+        <p className="mt-1 font-hand text-lg text-ink-soft">30 September 2026</p>
+        <Heart className="ml-auto mt-3 h-4 w-4 text-primary/50" />
       </div>
     </div>
   );
